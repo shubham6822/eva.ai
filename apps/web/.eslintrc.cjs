@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ["@eva/config/eslint"],
-};
+  extends: ['@eva/config/eslint'],
+}

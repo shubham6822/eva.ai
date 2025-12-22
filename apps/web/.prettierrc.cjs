@@ -1,1 +1,1 @@
-module.exports = require("@eva/config/prettier");
+module.exports = require('@eva/config/prettier')

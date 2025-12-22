@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "dev": "turbo run dev",
-    "build": "turbo run build"
+    "build": "turbo run build",
+    "format": "npx prettier --write ."
   },
   "keywords": [],
   "author": "",

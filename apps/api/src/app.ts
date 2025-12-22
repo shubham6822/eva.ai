@@ -1,11 +1,11 @@
-import express from "express"
+import express from 'express'
 
 const app = express()
 
 app.use(express.json())
 
-app.get("/", (_, res) => {
-    res.send("EVA Backend Running")
+app.get('/', (_, res) => {
+  res.send('EVA Backend Running')
 })
 
 export default app
