@@ -5,8 +5,8 @@ import { Separator } from "@/components/ui/separator";
 import { Plus } from "lucide-react";
 import { Suspense } from "react";
 import { Link } from "react-router";
-import AgentsTable from "./components/agent-table";
 import AgentsTableSkeleton from "./components/skeleton";
+import AgentsTable from "./components/table";
 
 export default function Agent() {
   return (
@@ -17,7 +17,7 @@ export default function Agent() {
             title="Voice Agents"
             description="Manage your voice AI agents and their configurations."
           />
-          <Link to="/dashboard/agents/create">
+          <Link to="/agents/create">
             <Button>
               <Plus className="h-4 w-4" />
               Create Agent
