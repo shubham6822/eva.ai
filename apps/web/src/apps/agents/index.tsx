@@ -8,7 +8,7 @@ import { Link } from "react-router";
 import AgentsTableSkeleton from "./components/skeleton";
 import AgentsTable from "./components/table";
 
-export default function Agent() {
+export default function AgentPage() {
   return (
      <PageContainer scrollable>
       <div className="w-full space-y-4">
@@ -17,7 +17,7 @@ export default function Agent() {
             title="Voice Agents"
             description="Manage your voice AI agents and their configurations."
           />
-          <Link to="/agents/create">
+          <Link to="/agent/create">
             <Button>
               <Plus className="h-4 w-4" />
               Create Agent

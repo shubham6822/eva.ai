@@ -1,14 +1,19 @@
-import Agent from "@/apps/agents";
-import Home from "@/apps/home";
+import AgentPage from "@/apps/agents";
+import AgentCreatePage from "@/apps/agents/(create)";
+import HomePage from "@/apps/home";
 import { createBrowserRouter } from "react-router";
 
 export const routes = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
+        element: <HomePage />,
     },
     {
         path: "/agent",
-        element: <Agent />,
+        element: <AgentPage />,
+    },
+    {
+        path: "/agent/create",
+        element: <AgentCreatePage />,
     }
 ]);
