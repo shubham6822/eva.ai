@@ -32,18 +32,14 @@ const data = {
   ],
   navMain: [
     {
-      title: 'Agents',
+      title: 'Assistants',
       url: '#',
       icon: Bot,
       isActive: true,
       items: [
         {
-          title: 'All Agents',
-          url: '#',
-        },
-        {
-          title: 'Create',
-          url: '#',
+          title: 'Agent',
+          url: '/agent',
         },
       ],
     }
