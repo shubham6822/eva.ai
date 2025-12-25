@@ -1,3 +1,6 @@
+import { RouterProvider } from "react-router";
+import { routes } from "./config/routes";
+
 export default function App() {
-  return <div className="text-green-500 ">App</div>
+  return <RouterProvider router={routes} />;
 }
