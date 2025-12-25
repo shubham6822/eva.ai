@@ -1,8 +1,10 @@
 from dotenv import load_dotenv
 
 from livekit import agents, rtc
-from livekit.agents import AgentServer,AgentSession, Agent, room_io
-from livekit.plugins import noise_cancellation, silero, deepgram, google
+from livekit.agents import AgentServer, AgentSession, Agent, room_io
+from livekit.plugins import noise_cancellation, silero
+from livekit.plugins.deepgram import STT as DeepgramSTT, TTS as DeepgramTTS
+from livekit.plugins.google import LLM as GoogleLLM
 from livekit.plugins.turn_detector.multilingual import MultilingualModel
 
 load_dotenv(".env.local")
@@ -22,9 +24,9 @@ server = AgentServer()
 @server.rtc_session()
 async def my_agent(ctx: agents.JobContext):
     session = AgentSession(
-        stt=deepgram.STT(),  
-        llm=google.LLM(model="gemini-2.5-flash-lite"),  
-        tts=deepgram.TTS(model="aura-asteria-en"),  
+        stt=DeepgramSTT(),  
+        llm=GoogleLLM(model="gemini-2.5-flash-lite"),  
+        tts=DeepgramTTS(model="aura-asteria-en"),  
         vad=silero.VAD.load(),
         turn_detection=MultilingualModel(),
     )
