@@ -41,6 +41,10 @@ const data = {
           title: 'Agent',
           url: '/agent',
         },
+        {
+          title: 'Playground',
+          url: '/playground',
+        },
       ],
     }
   ],
