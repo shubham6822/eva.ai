@@ -1,32 +1,48 @@
 import type { Request, Response } from "express";
-import { AccessToken, RoomServiceClient } from 'livekit-server-sdk';
-import { v4 as uuid } from 'uuid';
+import { AccessToken, RoomServiceClient } from "livekit-server-sdk";
+import { v4 as uuid } from "uuid";
 
-export const getToken = async (req:Request, res:Response) => {
+export const getToken = async (req: Request, res: Response) => {
   try {
-    const livekitUrl = process.env.LIVEKIT_URL 
-    const livekitApiKey = process.env.LIVEKIT_API_KEY 
-    const livekitApiSecret = process.env.LIVEKIT_API_SECRET
+    const userId = req.query.userId as string;
+    if (!userId) {
+      return res.status(400).json({ error: "Missing userId" });
+    }
 
-    if (!livekitUrl || !livekitApiKey || !livekitApiSecret) return res.status(500).json({ error: 'LiveKit configuration is missing' });
+    const apiKey = process.env.LIVEKIT_API_KEY!;
+    const apiSecret = process.env.LIVEKIT_API_SECRET!;
+    const host = process.env.LIVEKIT_URL!;
 
     const roomName = uuid();
-    const roomClient = new RoomServiceClient(livekitUrl, livekitApiKey, livekitApiSecret);
 
-    const grant = {
+    const roomService = new RoomServiceClient(
+      host,
+      apiKey,
+      apiSecret
+    );
+
+    await roomService.createRoom({ name: roomName });
+
+    const accessToken = new AccessToken(apiKey, apiSecret, {
+      identity: userId,
+    });
+
+    accessToken.addGrant({
       roomJoin: true,
       room: roomName,
       canPublish: true,
       canSubscribe: true,
       canPublishData: true,
-    }
+    });
 
-    const accessToken = new AccessToken(livekitApiKey,livekitApiSecret,{ identity: uuid() });
-    accessToken.addGrant(grant);
     const token = await accessToken.toJwt();
 
-    await res.json({ token, roomName });
-  } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.json({
+      token,
+      roomName,
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Internal Server Error" });
   }
-}
+};
