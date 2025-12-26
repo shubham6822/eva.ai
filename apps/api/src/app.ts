@@ -1,11 +1,9 @@
 import bodyParser from 'body-parser'
 import cors from "cors"
-import dotenv from 'dotenv'
 import express from 'express'
+import { getToken } from './controllers/token.js'
 
 const app: express.Application = express()
-
-dotenv.config()
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -14,5 +12,7 @@ app.use(cors())
 app.get('/', (_, res) => {
   res.json({ message: 'API is running' })
 })
+
+app.get("/generate-token", getToken)
 
 export default app
