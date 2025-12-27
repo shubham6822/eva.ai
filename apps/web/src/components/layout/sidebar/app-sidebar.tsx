@@ -1,17 +1,16 @@
-import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarRail } from '@/components/ui/sidebar'
-import { AudioWaveform, Bot, Command, Frame, GalleryVerticalEnd, Map, PieChart } from 'lucide-react'
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarRail } from '@/components/ui/sidebar'
+import { AudioWaveform, Bot, Command, CompassIcon, Frame, GalleryVerticalEnd, Map, PieChart } from 'lucide-react'
 import * as React from 'react'
 import { NavMain } from './components/nav-main'
 import { NavProjects } from './components/nav-projects'
 import { NavUser } from './components/nav-user'
-import { TeamSwitcher } from './components/team-switcher'
 
 // This is sample data.
 const data = {
   user: {
-    name: 'shadcn',
-    email: 'm@example.com',
-    avatar: '/avatars/shadcn.jpg',
+    name: 'shubham',
+    email: 'sharmashubham6822@gmail.com',
+    avatar: 'https://shubhamsharma-portfolio.vercel.app/r/images/avatar/avatar-shubham.png',
   },
   teams: [
     {
@@ -71,7 +70,20 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
-        <TeamSwitcher teams={data.teams} />
+         <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
+            >
+              <a href="#">
+                <CompassIcon className="!size-5" />
+                <span className="text-base font-semibold">Eva AI</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+
       </SidebarHeader>
       <SidebarContent>
         <NavMain items={data.navMain} />
